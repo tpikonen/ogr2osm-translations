@@ -1,3 +1,12 @@
+# Translation of feature class numbers from National Land Survey of Finlands
+# Maastotietokanta to Openstreetmap tag sets.
+#
+# Translation tables originally from Openstreetmap wiki,
+# http://wiki.openstreetmap.org/wiki/Fi:Maastotietokanta/Luokat
+#
+# Copyright (c) 2013 Teemu Ikonen <tpikonen@gmail.com>
+# License: MIT License http://opensource.org/licenses/mit-license.php
+
 from osgeo import ogr
 import re
 
