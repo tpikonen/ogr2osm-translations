@@ -20,6 +20,10 @@ def filterFeaturePost(feature, ogrfeature, ogrgeometry):
     feature.tags['source'] = 'MTK_2013' # FIXME: Read year from input XML
 
 
+def ustr(x):
+    return unicode(str(x), 'utf_8') # MTK XML is encoded in UTF-8
+
+
 mtk_features = {
 # featureclass (kohdeluokka) : function from ogrfeature to OSM tag dict
 # Work in progress.
@@ -146,11 +150,11 @@ mtk_features = {
 # Korkeuskäyrän korkeusarvo
 52191 : lambda _: {},
 # Korkeuspiste
-52210 : lambda f: { "ele:n60" : f['teksti'], },
+52210 : lambda f: { "ele:n60" : ustr(f['teksti']), },
 # Syvyyskäyrän syvyysarvo
 54191 : lambda _: {},
 # Syvyyspiste
-54210 : lambda f: { "depth" : f['teksti'], },
+54210 : lambda f: { "depth" : ustr(f['teksti']), },
 # Korkeuskäyrä
 52100 : lambda _: {},
 # Syvyyskäyrä
@@ -256,7 +260,7 @@ mtk_features = {
 # Leveän virtaveden juoksusuunta
 36393 : lambda _: {},
 # Vedenpinnan korkeusluku
-36291 : lambda f: { "ele:n60" : f['teksti'], },
+36291 : lambda f: { "ele:n60" : ustr(f['teksti']), },
 # Jyrkänne
 34400 : lambda _: { "natural" : "cliff", },
 # Kalliohalkeama
@@ -358,25 +362,25 @@ mtk_features = {
 # Kiven nimi
 34601 : lambda _: {},
 # Merkittävän luontokohteen nimi
-34901 : lambda f: { "natural" : "feature", "name" : f['teksti'], },
+34901 : lambda f: { "natural" : "feature", "name" : ustr(f['teksti']), },
 # Pellon tai niityn nimi
-35010 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35010 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Metsäalueen nimi
-35020 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35020 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Suon nimi
-35030 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35030 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Kohouman nimi
-35040 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35040 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Painanteen nimi
-35050 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35050 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Niemen nimi
-35060 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35060 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Saaren nimi
-35070 : lambda f: { "place" : "island", "name" : f['teksti'], },
+35070 : lambda f: { "place" : "island", "name" : ustr(f['teksti']), },
 # Matalikon nimi
 35080 : lambda _: {},
 # Muu maastonimi
-35090 : lambda f: { "place" : "locality", "name" : f['teksti'], },
+35090 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Puun nimi
 35101 : lambda _: {},
 # Lähteen nimi
@@ -398,9 +402,9 @@ mtk_features = {
 # Varastoalueen nimi
 38901 : lambda _: {},
 # Rakennuksen nimi
-42101 : lambda f: { "name" : f['teksti'], },
+42101 : lambda f: { "name" : ustr(f['teksti']), },
 # Rakennusryhmän nimi
-42201 : lambda f: { "place" : "hamlet", "name" : f['teksti'], },
+42201 : lambda f: { "place" : "hamlet", "name" : ustr(f['teksti']), },
 # Altaan nimi
 44301 : lambda _: {},
 # Muistomerkin nimi
@@ -412,7 +416,7 @@ mtk_features = {
 # Kylän, kaupunginosan tai kulmakunnan nimi
 48120 : lambda _: {},
 # Talon nimi
-48130 : lambda f: { "name" : f['teksti'], },
+48130 : lambda f: { "name" : ustr(f['teksti']), },
 # Muu asutusnimi
 48190 : lambda _: {},
 # Luonnonsuojelualueen nimi
@@ -458,9 +462,9 @@ mtk_features = {
 # Tuulimoottori
 45500 : lambda _: { "power" : "generator", "power_source" : "wind", },
 # Maston korkeus
-44803 : lambda f: { "man_made" : "tower", "height" : f['teksti'], },
+44803 : lambda f: { "man_made" : "tower", "height" : ustr(f['teksti']), },
 # Savupiipun korkeus
-45303 : lambda f: { "height" : f['teksti'], },
+45303 : lambda f: { "height" : ustr(f['teksti']), },
 # Aallonmurtaja
 44100 : lambda _: { "man_made" : "breakwater", },
 # Aita,tekoaines
@@ -584,7 +588,7 @@ mtk_features = {
 # Kaatopaikan selite
 32302 : lambda _: {},
 # Liikennealueen selite
-32402 : lambda f: { "aeroway" : "helipad", } if re.match('Helikopter.*', f['teksti']) else {},
+32402 : lambda f: { "aeroway" : "helipad", } if re.match('Helikopter.*', ustr(f['teksti'])) else {},
 # Louhoksen selite
 32502 : lambda _: {},
 # Maatalousmaan selite
@@ -606,7 +610,7 @@ mtk_features = {
 # Metsän rajan selite
 39502 : lambda _: {},
 # Rakennuksen selite
-42102 : lambda f: { "tourism" : "hotel", } if re.match('Hot.*', f['teksti']) else {},
+42102 : lambda f: { "tourism" : "hotel", } if re.match('Hot.*', ustr(f['teksti'])) else {},
 # Rakennusryhmän selite
 42202 : lambda _: {},
 # Aidan selite
@@ -706,7 +710,7 @@ mtk_features = {
 # Kevytväylän alikulkusymboli
 12391 : lambda _: {},
 # Kulkukorkeusrajoitteen korkeus
-10111 : lambda f: { "maxheight" : f['teksti'], },
+10111 : lambda f: { "maxheight" : ustr(f['teksti']), },
 # Autotien siltanumero
 12105 : lambda _: {},
 # Autotien lauttanumero
@@ -770,7 +774,7 @@ mtk_features = {
 # Valaistu reunamerkki, länsi (poist. kohde)
 16216 : lambda _: {},
 # Hylyn syvyys
-16703 : lambda f: { "depth" : f['teksti'], },
+16703 : lambda f: { "depth" : ustr(f['teksti']), },
 # Kulkusyvyys (2.2mm teksti)
 16503 : lambda _: {},
 # Kulkusyvyys (1.8mm teksti)
