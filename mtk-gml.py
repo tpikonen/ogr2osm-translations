@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # Translation of feature class numbers from National Land Survey of Finlands
 # Maastotietokanta to Openstreetmap tag sets.
 #
