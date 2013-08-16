@@ -256,7 +256,7 @@ mtk_features = {
 # Leveän virtaveden juoksusuunta
 36393 : lambda _: {},
 # Vedenpinnan korkeusluku
-36291 : lambda _: { "ele:n60" : f['teksti'], },
+36291 : lambda f: { "ele:n60" : f['teksti'], },
 # Jyrkänne
 34400 : lambda _: { "natural" : "cliff", },
 # Kalliohalkeama
@@ -358,25 +358,25 @@ mtk_features = {
 # Kiven nimi
 34601 : lambda _: {},
 # Merkittävän luontokohteen nimi
-34901 : lambda _: { "natural" : "feature", "name" : f['teksti'], },
+34901 : lambda f: { "natural" : "feature", "name" : f['teksti'], },
 # Pellon tai niityn nimi
-35010 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35010 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Metsäalueen nimi
-35020 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35020 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Suon nimi
-35030 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35030 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Kohouman nimi
-35040 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35040 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Painanteen nimi
-35050 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35050 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Niemen nimi
-35060 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35060 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Saaren nimi
-35070 : lambda _: { "place" : "island", "name" : f['teksti'], },
+35070 : lambda f: { "place" : "island", "name" : f['teksti'], },
 # Matalikon nimi
 35080 : lambda _: {},
 # Muu maastonimi
-35090 : lambda _: { "place" : "locality", "name" : f['teksti'], },
+35090 : lambda f: { "place" : "locality", "name" : f['teksti'], },
 # Puun nimi
 35101 : lambda _: {},
 # Lähteen nimi
@@ -398,9 +398,9 @@ mtk_features = {
 # Varastoalueen nimi
 38901 : lambda _: {},
 # Rakennuksen nimi
-42101 : lambda _: { "name" : f['teksti'], },
+42101 : lambda f: { "name" : f['teksti'], },
 # Rakennusryhmän nimi
-42201 : lambda _: { "place" : "hamlet", "name" : f['teksti'], },
+42201 : lambda f: { "place" : "hamlet", "name" : f['teksti'], },
 # Altaan nimi
 44301 : lambda _: {},
 # Muistomerkin nimi
@@ -412,7 +412,7 @@ mtk_features = {
 # Kylän, kaupunginosan tai kulmakunnan nimi
 48120 : lambda _: {},
 # Talon nimi
-48130 : lambda _: { "name" : f['teksti'], },
+48130 : lambda f: { "name" : f['teksti'], },
 # Muu asutusnimi
 48190 : lambda _: {},
 # Luonnonsuojelualueen nimi
@@ -458,9 +458,9 @@ mtk_features = {
 # Tuulimoottori
 45500 : lambda _: { "power" : "generator", "power_source" : "wind", },
 # Maston korkeus
-44803 : lambda _: { "man_made" : "tower", "height" : f['teksti'], },
+44803 : lambda f: { "man_made" : "tower", "height" : f['teksti'], },
 # Savupiipun korkeus
-45303 : lambda _: { "height" : f['teksti'], },
+45303 : lambda f: { "height" : f['teksti'], },
 # Aallonmurtaja
 44100 : lambda _: { "man_made" : "breakwater", },
 # Aita,tekoaines
@@ -706,7 +706,7 @@ mtk_features = {
 # Kevytväylän alikulkusymboli
 12391 : lambda _: {},
 # Kulkukorkeusrajoitteen korkeus
-10111 : lambda _: { "maxheight" : f['teksti'], },
+10111 : lambda f: { "maxheight" : f['teksti'], },
 # Autotien siltanumero
 12105 : lambda _: {},
 # Autotien lauttanumero
@@ -770,7 +770,7 @@ mtk_features = {
 # Valaistu reunamerkki, länsi (poist. kohde)
 16216 : lambda _: {},
 # Hylyn syvyys
-16703 : lambda _: { "depth" : f['teksti'], },
+16703 : lambda f: { "depth" : f['teksti'], },
 # Kulkusyvyys (2.2mm teksti)
 16503 : lambda _: {},
 # Kulkusyvyys (1.8mm teksti)
