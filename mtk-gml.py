@@ -16,7 +16,7 @@ import re
 def filterFeaturePost(feature, ogrfeature, ogrgeometry):
     if feature is None and ogrfeature is None and ogrgeometry is None:
         return
-    feature.tags = mtk_features[ogrfeature['kohdeluokka']](ogrfeature)
+    feature.tags = mtk_features.get(ogrfeature['kohdeluokka'], lambda _: {})(ogrfeature)
     feature.tags['source'] = 'MTK_2013' # FIXME: Read year from input XML
 
 
