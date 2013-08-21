@@ -37,7 +37,7 @@ mtk_features = {
 # Ampuma-alueen reunaviiva
 62100 : lambda _: { "landuse" : "military", "military" : "range", },
 # Suoja-alueen reunaviiva
-62200 : lambda _: {},
+#62200 : lambda _: {}, # Same class as Suoja-alue (!)
 # Kunta
 84200 : lambda _: { "type" : "boundary", "boundary" : "administrative", "admin_level" : "8", "ref" : "FIXME", "name" : "FIXME", "place" : "FIXME", },
 # Valtakunnan rajapyykki
@@ -235,7 +235,7 @@ mtk_features = {
 # Harva louhikko
 34200 : lambda _: {},
 # Kallio - symboli
-34100 : lambda _: {},
+#34100 : lambda _: {}, # Same class as Kallio - alue (!)
 # Kivi
 34600 : lambda _: { "natural" : "stone", },
 # Lähde
@@ -425,7 +425,7 @@ mtk_features = {
 # Muu asutusnimi
 48190 : lambda _: {},
 # Luonnonsuojelualueen nimi
-72201 : lambda _: {},
+#72201 : lambda _: {}, # Same class as Luonnonpuisto (!)
 # Luonnonmuistomerkin nimi
 72303 : lambda _: {},
 # Muinaisjäännöksen nimi
@@ -477,7 +477,7 @@ mtk_features = {
 # Aita, istutettu
 44213 : lambda _: { "barrier" : "hedge", },
 # Allas - viiva
-44300 : lambda _: {},
+#44300 : lambda _: {}, # Same class as Allas - alue (!)
 # Ilmarata
 44500 : lambda _: {},
 # Pistolaituri, alle 5 m
@@ -641,7 +641,7 @@ mtk_features = {
 # Suoja-alueen selite
 62202 : lambda _: {},
 # Luonnonsuojelualueen selite
-72202 : lambda _: {},
+#72202 : lambda _: {}, # Same class as Kansallispuisto (!)
 # Luonnonmuistomerkin selite
 72304 : lambda _: {},
 # Muinaisjäännöksen selite
@@ -696,8 +696,6 @@ mtk_features = {
 72440 : lambda _: {},
 # Muinaisjäännös
 74330 : lambda _: {  "historic" : "archaeological_site", "area" : "yes", "fixme" : "castle/fort/memorial/ruins?", },
-# Suojametsä
-72500 : lambda _: {},
 # Suojelualueen reunaviiva
 72000 : lambda _: {},
 # Suojelukohteet tekninen viiva
