@@ -24,9 +24,67 @@ def ustr(x):
     return unicode(str(x), 'utf_8') # MTK XML is encoded in UTF-8
 
 
+def fget(ogrfeature, key, default=None):
+    """Get a value from ogrfeature['key'], return default if does not exist."""
+    try:
+        val = ogrfeature[key]
+    except ValueError:
+        val = default
+    return val
+
+
 def mtk_default(f):
     print("Kohdeluokka %s not known to this script" % f['kohdeluokka'])
     return {}
+
+
+def mtk_getnimi(f):
+    """Return a name string from various nimi_* features."""
+    # nimi_* features in Osoitepiste and Tieviiva layers giving the name in
+    # various languages. Roughly in order of how common they are.
+    nimi_feats = [ "nimi_suomi", "nimi_ruotsi", "nimi_inarinsaame",
+    "nimi_koltansaame", "nimi_pohjoissaame" ]
+    nimi = None
+    for lang in nimi_feats:
+        nimi = fget(f, lang)
+        if nimi:
+            nimi = ustr(nimi)
+            break
+    return nimi
+
+
+def mtk_highway(f):
+    tags = { "highway" : "road" }
+    taso = int(fget(f, 'tasosijainti', 0))
+    if taso == -11:
+        tags["tunnel"] = "yes"
+    elif taso != 0:
+        tags["layer"] = ustr(taso)
+    # FIXME: f['valmiusaste'] ?
+    paallyste = int(fget(f, 'paallyste', 0))
+    if paallyste > 0:
+        tags["surface"] = "paved" if paallyste == 2 else "unpaved"
+    yksisuun = int(fget(f, 'yksisuuntaisuus', 0))
+    if yksisuun > 0:
+        tags["oneway"] = "yes" if yksisuun == 1 else "-1"
+    nimi = mtk_getnimi(f)
+    if nimi:
+        tags["name"] = ustr(nimi)
+    return tags
+
+
+def mtk_12112(f):
+    tags = mtk_highway(f)
+    tags["highway"] = "primary"
+    nimi = mtk_getnimi(f)
+    if nimi:
+        if nimi == 'Valtatie':
+            nro = str(fget(f, 'tienumero', ''))
+            nimi = nimi + " " + nro
+            nimi= nimi.strip()
+            tags["highway"] = "trunk"
+        tags["name"] = ustr(nimi)
+    return tags
 
 
 mtk_features = {
@@ -727,29 +785,30 @@ mtk_features = {
 # Autotie Ia
 12111 : lambda _: { "highway" : "motorway", "oneway" : "yes", },
 # Autotie Ib
-12112 : lambda _: { "highway" : "road", },
+12112 : mtk_12112,
 # Autotie IIa
-12121 : lambda _: { "highway" : "road", },
+12121 : mtk_highway,
 # Autotie IIb
-12122 : lambda _: { "highway" : "road", },
+12122 : mtk_highway,
 # Autotie IIIa
-12131 : lambda _: { "highway" : "road", },
+12131 : mtk_highway,
 # Autotie IIIb
-12132 : lambda _: { "highway" : "road", },
+12132 : mtk_highway,
 # Ajotie
-12141 : lambda _: { "highway" : "road", },
+12141 : mtk_highway,
 # Lautta
 12151 : lambda _: { "route" : "ferry", },
 # Lossi
 12152 : lambda _: { "route" : "ferry", "type" : "cable", },
 # Talvitie
-12312 : lambda _: { "highway" : "road", "winter_road" : "yes" },
+12312 : lambda f: dict(mtk_highway(f).items() + {"winter_road":"yes"}.items()),
 # Polku
-12313 : lambda _: { "highway" : "path", },
+12313 : lambda f: dict(mtk_highway(f).items() + {"highway":"path"}.items()),
 # Kävely- ja pyörätie
-12314 : lambda _: { "highway" : "cycleway", "foot" : "designated", },
+12314 : lambda f: dict(mtk_highway(f).items() + \
+            { "highway" : "cycleway", "foot" : "designated" }.items()),
 # Ajopolku
-12316 : lambda _: { "highway" : "track", },
+12316 : lambda f: dict(mtk_highway(f).items() + { "highway":"track" }.items()),
 # Ankkuripaikka
 16600 : lambda _: { "seamark:type" : "anchorage", },
 # Hylky, luokittelematon
