@@ -173,7 +173,7 @@ mtk_features = {
 # Kaatopaikka
 32300 : lambda _: { "landuse" : "landfill", },
 # Kallio - alue
-34100 : lambda _: { "natural" : "bedrock", },
+34100 : lambda _: { "natural" : "bare_rock", "area" : "yes" },
 # Kivikko
 34700 : lambda _: { "natural" : "scree", },
 # Lentokentän kiitotie (tallennettu alaluokkiin)
