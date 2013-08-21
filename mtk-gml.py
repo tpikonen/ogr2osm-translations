@@ -109,7 +109,7 @@ mtk_features = {
 # Putkijohto, öljy
 26117 : lambda _: { "man_made" : "pipeline", "type" : "oil", },
 # Sähkölinja (tallennettu alaluokkiin)
-22300 : lambda _: {},
+22300 : lambda _: { "power" : "line", },
 # Sähkölinja, suurjännite
 22311 : lambda _: { "power" : "line", },
 # Sähkölinja, jakelujännite
@@ -177,7 +177,7 @@ mtk_features = {
 # Kivikko
 34700 : lambda _: { "natural" : "scree", },
 # Lentokentän kiitotie (tallennettu alaluokkiin)
-32410 : lambda _: {},
+32410 : lambda _: { "aeroway" : "runway", },
 # Lentokentän kiitotie, päällystetty
 32411 : lambda _: { "aeroway" : "runway", "surface" : "paved", },
 # Lentokentän kiitotie, päällystämätön
@@ -213,7 +213,7 @@ mtk_features = {
 # Soistuma
 35300 : lambda _: {},
 # Suo (tallennettu alaluokkiin)
-35400 : lambda _: {},
+35400 : lambda _: { "natural" : "wetland", },
 # Suo, helppokulkuinen puuton
 35411 : lambda _: { "natural" : "wetland", },
 # Suo, helppokulkuinen metsää kasvava
