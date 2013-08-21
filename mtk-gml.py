@@ -752,6 +752,8 @@ mtk_features = {
 12316 : lambda _: { "highway" : "track", },
 # Ankkuripaikka
 16600 : lambda _: { "seamark:type" : "anchorage", },
+# Hylky, luokittelematon
+16700 : lambda _: { "historic" : "wreck", "seamark:type" : "wreck", },
 # Hylky, pinnalla
 16712 : lambda _: { "historic" : "wreck", "seamark:type" : "wreck", "seamark:category" : "hull_visible", },
 # Hylky, syvyys tuntematon
