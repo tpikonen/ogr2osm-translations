@@ -16,12 +16,17 @@ import re
 def filterFeaturePost(feature, ogrfeature, ogrgeometry):
     if feature is None and ogrfeature is None and ogrgeometry is None:
         return
-    feature.tags = mtk_features.get(ogrfeature['kohdeluokka'], lambda _: {})(ogrfeature)
+    feature.tags = mtk_features.get(ogrfeature['kohdeluokka'], mtk_default)(ogrfeature)
     feature.tags['source'] = 'MTK_2013' # FIXME: Read year from input XML
 
 
 def ustr(x):
     return unicode(str(x), 'utf_8') # MTK XML is encoded in UTF-8
+
+
+def mtk_default(f):
+    print("Kohdeluokka %s not known to this script" % f['kohdeluokka'])
+    return {}
 
 
 mtk_features = {
