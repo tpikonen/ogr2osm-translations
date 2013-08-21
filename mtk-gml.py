@@ -764,18 +764,6 @@ mtk_features = {
 16122 : lambda _: {  "man_made" : "lighthouse", },
 # Merimajakka
 16126 : lambda _: { "man_made" : "lighthouse", "seamark:type" : "landmark", "seamark:category" : "tower", },
-# Valaistu reunamerkki, vasen (poist. kohde)
-16211 : lambda _: {},
-# Valaistu reunamerkki, oikea (poist. kohde)
-16212 : lambda _: {},
-# Valaistu reunamerkki, pohjois (poist. kohde)
-16213 : lambda _: {},
-# Valaistu reunamerkki, etelä (poist. kohde)
-16214 : lambda _: {},
-# Valaistu reunamerkki, itä (poist. kohde)
-16215 : lambda _: {},
-# Valaistu reunamerkki, länsi (poist. kohde)
-16216 : lambda _: {},
 # Hylyn syvyys
 16703 : lambda f: { "depth" : ustr(f['teksti']), },
 # Kulkusyvyys (2.2mm teksti)
