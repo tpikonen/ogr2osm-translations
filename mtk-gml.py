@@ -479,7 +479,7 @@ mtk_features = {
 # Allas - viiva
 #44300 : lambda _: {}, # Same class as Allas - alue (!)
 # Ilmarata
-44500 : lambda _: {},
+44500 : lambda _: { "aerialway": "unknown", },
 # Pistolaituri, alle 5 m
 45111 : lambda _: { "man_made" : "pier", },
 # Pistolaituri, vähintään 5 m
