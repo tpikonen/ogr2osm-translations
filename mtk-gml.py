@@ -453,27 +453,27 @@ mtk_features = {
 # Kulkuväylän nimi
 12301 : lambda _: {},
 # Rautatieliikennepaikan nimi
-14201 : lambda _: {},
+14201 : lambda f: { "railway" : "station", "name" : ustr(f['teksti']), },
 # Turvalaitteen nimi
 16101 : lambda _: {},
 # Maa-aineksenottoalueen nimi
-32101 : lambda _: {},
+32101 : lambda f: { "landuse" : "quarry", "name" : ustr(f['teksti']), },
 # Hautausmaan nimi
-32201 : lambda _: {},
+32201 : lambda f: { "landuse" : "cemetery", "name" : ustr(f['teksti']), },
 # Kaatopaikan nimi
-32301 : lambda _: {},
+32301 : lambda f: { "landuse" : "landfill", "name" : ustr(f['teksti']), },
 # Liikennealueen nimi
 32401 : lambda _: {},
 # Louhoksen nimi
-32501 : lambda _: {},
+32501 : lambda f: { "landuse" : "quarry", "name" : ustr(f['teksti']), },
 # Puiston nimi
-32901 : lambda _: {},
+32901 : lambda f: { "leisure" : "park", "name" : ustr(f['teksti']), },
 # Täytemaan nimi
 33001 : lambda _: {},
 # Urheilu- ja virkistysalueen nimi
-33101 : lambda _: {},
+33101 : lambda f: { "leisure" : "sports_centre", "name" : ustr(f['teksti']), },
 # Kiven nimi
-34601 : lambda _: {},
+34601 : lambda f: { "natural" : "stone", "name" : ustr(f['teksti']), },
 # Merkittävän luontokohteen nimi
 34901 : lambda f: { "natural" : "feature", "name" : ustr(f['teksti']), },
 # Pellon tai niityn nimi
@@ -491,27 +491,27 @@ mtk_features = {
 # Saaren nimi
 35070 : lambda f: { "place" : "islet", "name" : ustr(f['teksti']), },
 # Matalikon nimi
-35080 : lambda _: {},
+35080 : lambda f: { "natural" : "shoal", "name" : ustr(f['teksti']), },
 # Muu maastonimi
 35090 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Puun nimi
-35101 : lambda _: {},
+35101 : lambda f: { "natural" : "tree", "name" : ustr(f['teksti']), },
 # Lähteen nimi
-36101 : lambda _: {},
+36101 : lambda f: { "natural" : "spring", "name" : ustr(f['teksti']), },
 # Vakaveden nimi
-36201 : lambda _: {},
+36201 : lambda f: { "natural" : "water", "water" : "lake", "name" : ustr(f['teksti']), },
 # Virtaveden nimi
-36301 : lambda _: {},
+36301 : lambda f: { "natural" : "water", "water" : "river", "name" : ustr(f['teksti']), },
 # Vakaveden osan nimi
-36410 : lambda _: {},
+36410 : lambda f: { "natural" : "bay", "name" : ustr(f['teksti']), },
 # Virtaveden osan nimi
-36420 : lambda _: {},
+36420 : lambda f: { "natural" : "bay", "name" : ustr(f['teksti']), },
 # Muu vesistökohteen nimi
-36490 : lambda _: {},
+36490 : lambda f: { "natural" : "bay", "name" : ustr(f['teksti']), },
 # Kosken nimi
-38201 : lambda _: {},
+38201 : lambda f: { "waterway" : "rapids", "name" : ustr(f['teksti']), },
 # Vesikiven nimi
-38501 : lambda _: {},
+38501 : lambda f: { "natural" : "rock", "name" : ustr(f['teksti']), },
 # Varastoalueen nimi
 38901 : lambda _: {},
 # Rakennuksen nimi
@@ -519,9 +519,9 @@ mtk_features = {
 # Rakennusryhmän nimi
 42201 : lambda f: { "place" : "hamlet", "name" : ustr(f['teksti']), },
 # Altaan nimi
-44301 : lambda _: {},
+44301 : lambda f: { "natural" : "water", "water" : "pond", "name" : ustr(f['teksti']), },
 # Muistomerkin nimi
-44901 : lambda _: {},
+44901 : lambda f: { "historic" : "memorial", "name" : ustr(f['teksti']), },
 # Kaupungin nimi
 48111 : lambda f: { "place" : "town", "name" : ustr(f['teksti']), },
 # Muun kunnan nimi
@@ -537,15 +537,15 @@ mtk_features = {
 # Luonnonmuistomerkin nimi
 72303 : lambda _: {},
 # Muinaisjäännöksen nimi
-72403 : lambda _: {},
+72403 : lambda f: { "historic" : "archaeological_site", "name" : ustr(f['teksti']), },
 # Luonnonpuiston nimi
-72502 : lambda _: {},
+72502 : lambda f: { "leisure" : "nature_reserve", "name" : ustr(f['teksti']), },
 # Kansallispuiston nimi
-72601 : lambda _: {},
+72601 : lambda f: { "leisure" : "nature_reserve", "name" : ustr(f['teksti']), },
 # Erämaa-alueen nimi
-72701 : lambda _: {},
+72701 : lambda f: { "boundary" : "protected_area", "protect_class" : "1a", "name" : ustr(f['teksti']), },
 # Retkeilyalueen nimi
-72801 : lambda _: {},
+72801 : lambda f: { "tourism" : "camp_site", "name" : ustr(f['teksti']), },
 # Valtakunnan rajapyykin nimi
 82501 : lambda _: {},
 # Rajapyykin nimi
