@@ -794,8 +794,9 @@ mtk_features = {
 72340 : lambda _: {},
 # Muinaisjäännös
 72330 : lambda _: { "historic" : "archaeological_site", "fixme" : "castle/fort/memorial/ruins?", },
+## Features Below are lines and do not map well to OSM data types
 # Erämaa-alue
-72700 : lambda _: {},
+72700 : lambda _: {}, # "boundary" : "protected_area", "protect_class" : "1b" },
 # Rauhoitettu kivi
 72410 : lambda _: {},
 # Rauhoitettu puu
@@ -803,7 +804,7 @@ mtk_features = {
 # Muu rauhoitettu kohde
 72440 : lambda _: {},
 # Muinaisjäännös
-74330 : lambda _: {  "historic" : "archaeological_site", "area" : "yes", "fixme" : "castle/fort/memorial/ruins?", },
+74330 : lambda _: {}, # "historic" : "archaeological_site", "area" : "yes", "fixme" : "castle/fort/memorial/ruins?", },
 # Suojelualueen reunaviiva
 72000 : lambda _: {},
 # Suojelukohteet tekninen viiva
@@ -812,6 +813,7 @@ mtk_features = {
 40200 : lambda _: {},
 # Taajaan rakennetun alueen reunaviiva
 40100 : lambda _: {},
+## Lines end
 # Lauttasymboli
 12192 : lambda _: {},
 # Lossisymboli
