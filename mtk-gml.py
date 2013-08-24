@@ -115,6 +115,14 @@ def mtk_12112(f):
     return tags
 
 
+def mtk_surveypoint(f):
+    tags = { "man_made" : "survey_point" }
+    height = fget(f, 'korkeusarvo')
+    if height:
+        tags["ele:n60"] = ustr(float(height) / 1000.0)
+    return tags
+
+
 mtk_features = {
 # featureclass (kohdeluokka) : function from ogrfeature to OSM tag dict
 # Work in progress.
@@ -220,20 +228,24 @@ mtk_features = {
 38991 : lambda _: {},
 # Tunnelin aukko
 16800 : lambda _: {},
+# Kolmiopiste, luokittelematon
+95100 : mtk_surveypoint,
 # Kolmiopiste, I luokka
-95111 : lambda _: { "man_made" : "survey_point", },
+95111 : mtk_surveypoint,
 # Kolmiopiste, II luokka
-95112 : lambda _: { "man_made" : "survey_point", },
+95112 : mtk_surveypoint,
 # Kolmiopiste, III luokka
-95113 : lambda _: { "man_made" : "survey_point", },
+95113 : mtk_surveypoint,
+# Korkeuskiintopiste, luokittelematon
+95200 : mtk_surveypoint,
 # Korkeuskiintopiste, I luokka
-95211 : lambda _: { "man_made" : "survey_point", },
+95211 : mtk_surveypoint,
 # Korkeuskiintopiste, II luokka
-95212 : lambda _: { "man_made" : "survey_point", },
+95212 : mtk_surveypoint,
 # Korkeuskiintopiste, III luokka
-95213 : lambda _: { "man_made" : "survey_point", },
+95213 : mtk_surveypoint,
 # Korkeuskiintopiste, IV luokka
-95214 : lambda _: { "man_made" : "survey_point", },
+95214 : mtk_surveypoint,
 # Vesiasteikko
 95300 : lambda _: { "man_made" : "monitoring_station", "monitoring:river_level" : "yes", },
 # Korkeuskäyrän viettoviiva
