@@ -13,6 +13,34 @@ from osgeo import ogr
 import re
 
 
+def filterLayer(layer):
+    skiplayers = [
+        "AidanSymboli",
+        "HarvaLouhikko",
+        "Kaislikko",
+        "Kalliohalkeama",
+        "KallioSymboli",
+        "Karttasymboli",
+        "Korkeuskayra",
+        "KorkeuskayranKorkeusarvo",
+        "KunnanHallintokeskus",
+        "Maasto2kuvionReuna",
+        "MaastokuvionReuna",
+        "MerkittavaLuontokohde",
+        "MetsamaanKasvillisuus",
+        "MetsamaanMuokkaus",
+        "MetsanRaja",
+        "Pelastuskoodipiste",
+        "PutkijohdonSymboli",
+        "RajavyohykkeenTakaraja",
+    ]
+    if layer.GetName() in skiplayers:
+        print("Not processing layer '%s'" % layer.GetName())
+        return None
+    else:
+        return layer
+
+
 def filterFeaturePost(feature, ogrfeature, ogrgeometry):
     if feature is None and ogrfeature is None and ogrgeometry is None:
         return
