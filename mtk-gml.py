@@ -97,7 +97,7 @@ def mtk_highway(f):
         tags["oneway"] = "yes" if yksisuun == 1 else "-1"
     nimi = mtk_getnimi(f)
     if nimi:
-        tags["name"] = ustr(nimi)
+        tags["name"] = nimi
     return tags
 
 
