@@ -152,6 +152,8 @@ mtk_features = {
 82400 : lambda _: {},
 # Muuntaja
 22100 : lambda _: { "power" : "transformer", },
+# Putkijohdon symboli, luokittelematon
+26190 : lambda _: {},
 # Putkijohdon symboli, kaasu
 26191 : lambda _: {},
 # Putkijohdon symboli, kiinteä aine
@@ -180,6 +182,8 @@ mtk_features = {
 45800 : lambda _: { "man_made" : "water_tower", },
 # Muuntoasema
 22200 : lambda _: { "power" : "station", },
+# Putkijohto, luokittelematon
+26111 : lambda _: { "man_made" : "pipeline", },
 # Putkijohto, kaasu
 26111 : lambda _: { "man_made" : "pipeline", "type" : "gas", },
 # Putkijohto, kiinteä aine
@@ -282,6 +286,8 @@ mtk_features = {
 32418 : lambda _: {},
 # Louhos
 32500 : lambda _: { "landuse" : "quarry", },
+# Maa-aineksenottoalue, luokittelematon
+32100 : lambda _: { "landuse" : "quarry", "resource" : "aggregate", },
 # Maa-aineksenottoalue, karkea kivennäisaines
 32111 : lambda _: { "landuse" : "quarry", "resource" : "aggregate", },
 # Maa-aineksenottoalue, hieno kivennäisaines
@@ -384,6 +390,8 @@ mtk_features = {
 38300 : lambda _: { "natural" : "wetland", "wetland" : "reedbed", },
 # Matalikko
 38700 : lambda _: { "seamark:type" : "sea_area", "seamark:sea_area:category" : "shoal", },
+# Muu avoin alue, luokittelematon
+39100 : lambda _: {},
 # Avoin metsämaa
 39110 : lambda _: {},
 # Varvikko
@@ -408,6 +416,8 @@ mtk_features = {
 38513 : lambda _: { "seamark:type" : "rock", "seamark:rock:water_level" : "always_dry", },
 # Koski
 38200 : lambda _: { "whitewater:rapid_grade" : "unknown", },
+# Maasto/2 kuvion reuna, luokittelematon
+30200 : lambda _: {},
 # Maasto/2 yksikäsitteinen reunaviiva
 30211 : lambda _: {},
 # Maasto/2 epämääräinen reunaviiva
