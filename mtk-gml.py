@@ -489,7 +489,7 @@ mtk_features = {
 # Niemen nimi
 35060 : lambda f: { "place" : "locality", "name" : ustr(f['teksti']), },
 # Saaren nimi
-35070 : lambda f: { "place" : "island", "name" : ustr(f['teksti']), },
+35070 : lambda f: { "place" : "islet", "name" : ustr(f['teksti']), },
 # Matalikon nimi
 35080 : lambda _: {},
 # Muu maastonimi
