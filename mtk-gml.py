@@ -103,15 +103,24 @@ def mtk_highway(f):
 
 def mtk_12112(f):
     tags = mtk_highway(f)
-    tags["highway"] = "primary"
+    tags["highway"] = "trunk"
     nimi = mtk_getnimi(f)
     if nimi:
         if nimi == 'Valtatie':
-            nro = str(fget(f, 'tienumero', ''))
+            nro = ustr(fget(f, 'tienumero', ''))
             nimi = nimi + " " + nro
             nimi= nimi.strip()
-            tags["highway"] = "trunk"
-        tags["name"] = ustr(nimi)
+        tags["name"] = nimi
+    return tags
+
+
+def mtk_12141(f):
+    tags = mtk_highway(f)
+    tags["highway"] = "track"
+    if tags["surface"] == "paved":
+        tags["tracktype"] = "grade1"
+    else:
+        tags["tracktype"] = "grade2"
     return tags
 
 
@@ -835,19 +844,19 @@ mtk_features = {
 # E- valta- tai kantatien numero
 12183 : lambda _: {},
 # Autotie Ia
-12111 : lambda _: { "highway" : "motorway", "oneway" : "yes", },
+12111 : lambda f: dict(mtk_highway(f).items() + {"highway":"motorway"}.items()),
 # Autotie Ib
-12112 : mtk_12112,
+12112 : mtk_12112, # trunk
 # Autotie IIa
-12121 : mtk_highway,
+12121 : lambda f: dict(mtk_highway(f).items() + {"highway":"primary"}.items()),
 # Autotie IIb
-12122 : mtk_highway,
+12122 : lambda f: dict(mtk_highway(f).items()+{"highway":"secondary"}.items()),
 # Autotie IIIa
-12131 : mtk_highway,
+12131 : lambda f: dict(mtk_highway(f).items() + {"highway":"residential"}.items()),
 # Autotie IIIb
-12132 : mtk_highway,
+12132 : lambda f: dict(mtk_highway(f).items() + {"highway":"service"}.items()),
 # Ajotie
-12141 : mtk_highway,
+12141 : mtk_12141, # track, grade 1 or 2
 # Lautta
 12151 : lambda _: { "route" : "ferry", },
 # Lossi
@@ -860,7 +869,7 @@ mtk_features = {
 12314 : lambda f: dict(mtk_highway(f).items() + \
             { "highway" : "cycleway", "foot" : "designated" }.items()),
 # Ajopolku
-12316 : lambda f: dict(mtk_highway(f).items() + { "highway":"track" }.items()),
+12316 : lambda f: dict(mtk_highway(f).items() + { "highway":"track", "tracktype" : "grade3" }.items()),
 # Ankkuripaikka
 16600 : lambda _: { "seamark:type" : "anchorage", },
 # Hylky, luokittelematon
