@@ -515,7 +515,7 @@ mtk_features = {
 # Varastoalueen nimi
 38901 : lambda _: {},
 # Rakennuksen nimi
-42101 : lambda f: { "name" : ustr(f['teksti']), },
+42101 : lambda f: { "place" : "isolated_dwelling", "name" : ustr(f['teksti']),},
 # Rakennusryhmän nimi
 42201 : lambda f: { "place" : "hamlet", "name" : ustr(f['teksti']), },
 # Altaan nimi
@@ -523,15 +523,15 @@ mtk_features = {
 # Muistomerkin nimi
 44901 : lambda _: {},
 # Kaupungin nimi
-48111 : lambda _: {},
+48111 : lambda f: { "place" : "town", "name" : ustr(f['teksti']), },
 # Muun kunnan nimi
-48112 : lambda _: {},
+48112 : lambda f: { "place" : "village", "name" : ustr(f['teksti']), },
 # Kylän, kaupunginosan tai kulmakunnan nimi
-48120 : lambda _: {},
+48120 : lambda f: { "place" : "suburb", "name" : ustr(f['teksti']), },
 # Talon nimi
-48130 : lambda f: { "name" : ustr(f['teksti']), },
+48130 : lambda f: { "place" : "isolated_dwelling", "name" : ustr(f['teksti']),},
 # Muu asutusnimi
-48190 : lambda _: {},
+48190 : lambda f: { "place" : "isolated_dwelling", "name" : ustr(f['teksti']),},
 # Luonnonsuojelualueen nimi
 #72201 : lambda _: {}, # Same class as Luonnonpuisto (!)
 # Luonnonmuistomerkin nimi
