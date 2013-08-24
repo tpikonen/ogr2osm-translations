@@ -278,24 +278,24 @@ mtk_features = {
 34100 : lambda _: { "natural" : "bare_rock", "area" : "yes" },
 # Kivikko
 34700 : lambda _: { "natural" : "scree", },
-# Lentokentän kiitotie (tallennettu alaluokkiin)
-32410 : lambda _: { "aeroway" : "runway", },
+# Lentokenttäalue, tuntematon
+32400 : lambda _: { "aeroway" : "aerodrome", },
 # Lentokentän kiitotie, päällystetty
 32411 : lambda _: { "aeroway" : "runway", "surface" : "paved", },
 # Lentokentän kiitotie, päällystämätön
 32412 : lambda _: { "aeroway" : "runway", "surface" : "unpaved", },
 # Muu lentokenttäalue
-32413 : lambda _: {},
+32413 : lambda _: { "aeroway" : "aerodrome", },
 # Muu lentokenttäalue, päällystetty
-32415 : lambda _: {},
+32415 : lambda _: { "aeroway" : "aerodrome", },
 # Muu lentokenttäalue, päällystämätön
-32416 : lambda _: {},
+32416 : lambda _: { "aeroway" : "aerodrome", },
 # Muu lentoliikennealue
-32414 : lambda _: {},
+32414 : lambda _: { "aeroway" : "aerodrome", },
 # Muu lentoliikennealue, päällystetty
-32417 : lambda _: {},
+32417 : lambda _: { "aeroway" : "aerodrome", },
 # Muu lentoliikennealue, päällystämätön
-32418 : lambda _: {},
+32418 : lambda _: { "aeroway" : "aerodrome", },
 # Louhos
 32500 : lambda _: { "landuse" : "quarry", },
 # Maa-aineksenottoalue, luokittelematon
