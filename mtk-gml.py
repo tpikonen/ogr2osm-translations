@@ -133,7 +133,7 @@ mtk_features = {
 # Suoja-alueen reunaviiva
 #62200 : lambda _: {}, # Same class as Suoja-alue (!)
 # Kunta
-84200 : lambda _: { "type" : "boundary", "boundary" : "administrative", "admin_level" : "8", "ref" : "FIXME", "name" : "FIXME", "place" : "FIXME", },
+84200 : lambda f: { "type" : "boundary", "boundary" : "administrative", "admin_level" : "8", "ref" : ustr(fget(f, 'kuntatunnus', 'FIXME')), "name" : "FIXME", "place" : "FIXME", },
 # Valtakunnan rajapyykki
 82500 : lambda _: { "man_made" : "cairn", },
 # Muu kaupunki
