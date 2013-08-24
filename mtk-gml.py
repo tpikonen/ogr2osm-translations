@@ -555,7 +555,7 @@ mtk_features = {
 # Ilmaradan kannatinpylväs
 44591 : lambda _: { "aerialway" : "pylon", },
 # Kellotapuli
-44600 : lambda _: {},
+44600 : lambda _: { "man_made" : "tower", "tower:type" : "bell_tower", },
 # Lähestymisvalo
 44700 : lambda _: { "man_made" : "beacon", },
 # Masto
@@ -575,9 +575,9 @@ mtk_features = {
 # Tuulimoottori
 45500 : lambda _: { "power" : "generator", "power_source" : "wind", },
 # Maston korkeus
-44803 : lambda f: { "man_made" : "tower", "height" : ustr(f['teksti']), },
+44803 : lambda f: { "man_made" : "tower", "height" : ustr(float(fget('korkeusarvo', 0.0))/1000.0), },
 # Savupiipun korkeus
-45303 : lambda f: { "height" : ustr(f['teksti']), },
+45303 : lambda _: { },
 # Aallonmurtaja
 44100 : lambda _: { "man_made" : "breakwater", },
 # Aita,tekoaines
