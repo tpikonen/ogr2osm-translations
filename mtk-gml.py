@@ -777,7 +777,7 @@ mtk_features = {
 # Vesiasteikon selite
 95302 : lambda _: {},
 # Luonnonsuojelualue
-72200 : lambda _: {},
+72200 : lambda _: { "boundary" : "protected_area", "protection_title" : "luonnonsuojelualue", "protect_class" : "4", },
 # Luonnonpuisto
 72201 : lambda _: { "boundary" : "protected_area", "protection_title" : "luonnonpuisto", "related_law" : "Luonnonsuojelulaki", "protect_class" : "1", },
 # Kansallispuisto
