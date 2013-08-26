@@ -33,6 +33,8 @@ def filterLayer(layer):
         "Pelastuskoodipiste",
         "PutkijohdonSymboli",
         "RajavyohykkeenTakaraja",
+        "Rakennusreunaviiva",
+        "RautatienSymboli",
     ]
     if layer.GetName() in skiplayers:
         print("Not processing layer '%s'" % layer.GetName())
@@ -603,7 +605,8 @@ mtk_features = {
 45112 : lambda _: { "man_made" : "pier", "area" : "yes", },
 # Rakennelma
 45700 : lambda _: { "man_made" : "yes", },
-# Rakennusalueen reunaviiva
+## Building border lines are not imported
+# Rakennusalueen reunaviiva, luokittelematon
 42200 : lambda _: {},
 # Asuinrakennus, ? krs
 42110 : lambda _: {},
@@ -643,6 +646,9 @@ mtk_features = {
 42161 : lambda _: {},
 # Muu rakennus, 3-n krs
 42162 : lambda _: {},
+## Building border lines end
+# Rakennus, luokittelematon
+42200 : lambda _: { "building" : "yes", },
 # Asuinrakennus, ? krs
 42210 : lambda _: { "building" : "residential", },
 # Asuinrakennus, 1-2 krs
