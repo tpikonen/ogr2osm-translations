@@ -584,7 +584,7 @@ mtk_features = {
 # Tuulimoottori
 45500 : lambda _: { "power" : "generator", "power_source" : "wind", },
 # Maston korkeus
-44803 : lambda f: { "man_made" : "tower", "height" : ustr(float(fget('korkeusarvo', 0.0))/1000.0), },
+44803 : lambda f: { "man_made" : "tower", "height" : ustr(float(fget(f, 'korkeusarvo', 0.0))/1000.0), },
 # Savupiipun korkeus
 45303 : lambda _: { },
 # Aallonmurtaja
