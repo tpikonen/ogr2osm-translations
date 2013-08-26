@@ -134,6 +134,31 @@ def mtk_surveypoint(f):
     return tags
 
 
+def mtk_railway(f):
+    tags = {}
+    state = int(fget(f, "valmiusaste", 0))
+    if state == 0:
+        tags["railway"] = "rail" # In use
+    elif state == 1:
+        tags["railway"] = "construction" # Under construction
+    elif state == 2:
+        tags["railway"] = "disused"
+    elif state == 4:
+        return tags # Being planned, do not add
+    taso = int(fget(f, 'tasosijainti', 0))
+    if taso == -11:
+        tags["tunnel"] = "yes"
+    elif taso != 0:
+        tags["layer"] = ustr(taso)
+    electrified = int(fget(f, 'sahkoisyys', 0))
+    if electrified == 0:
+        pass # unknown
+    elif electrified == 1:
+        tags["electrified"] = "yes"
+    elif electrified == 2:
+        tags["electrified"] = "no"
+    return tags
+
 mtk_features = {
 # featureclass (kohdeluokka) : function from ogrfeature to OSM tag dict
 # Work in progress.
@@ -688,21 +713,21 @@ mtk_features = {
 # Muu rakennus, 3-n krs
 42262 : lambda _: { "building" : "yes", },
 # Rautatieliikennepaikka
-14200 : lambda _: {},
+14200 : lambda _: { "railway" : "station" },
 # Rautatie, sähköistyssymboli
 14191 : lambda _: {},
 # Rautatie, käytöstä poistetun symboli
 14192 : lambda _: {},
 # Rautatie (tallennettu alaluokkiin)
-14110 : lambda _: { "railway" : "rail", },
+14110 : mtk_railway,
 # Rautatie, sähköistetty
-14111 : lambda _: { "railway" : "rail", "electrified" : "yes", },
+14111 : mtk_railway,
 # Rautatie, sähköistämätön
-14112 : lambda _: { "railway" : "rail", "electrified" : "no", },
+14112 : mtk_railway,
 # Kapearaiteinen rautatie
-14121 : lambda _: { "railway" : "narrow_gauge", },
+14121 : lambda f: dict(mtk_railway(f).items() + {"railway" : "narrow_gauge"}.items()),
 # Metro
-14131 : lambda _: { "railway" : "subway", },
+14131 : lambda f: dict(mtk_railway(f).items() + {"railway" : "subway"}.items()),
 # Kulkuväylän selite
 12302 : lambda _: {},
 # Turvalaitteen selite
