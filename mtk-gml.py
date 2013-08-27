@@ -728,6 +728,7 @@ mtk_features = {
 14121 : lambda f: dict(mtk_railway(f).items() + {"railway" : "narrow_gauge"}.items()),
 # Metro
 14131 : lambda f: dict(mtk_railway(f).items() + {"railway" : "subway"}.items()),
+## 'Selite' points are not imported
 # Kulkuväylän selite
 12302 : lambda _: {},
 # Turvalaitteen selite
@@ -816,6 +817,7 @@ mtk_features = {
 85100 : lambda _: {},
 # Vesiasteikon selite
 95302 : lambda _: {},
+## 'Selite' points end
 # Luonnonsuojelualue
 72200 : lambda _: { "boundary" : "protected_area", "protection_title" : "luonnonsuojelualue", "protect_class" : "4", },
 # Luonnonpuisto
