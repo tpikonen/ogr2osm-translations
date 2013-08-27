@@ -351,7 +351,7 @@ mtk_features = {
 # Puisto
 32900 : lambda _: { "leisure" : "park", },
 # Soistuma
-35300 : lambda _: {},
+35300 : lambda _: { "natural" : "wetland", "wetland" : "swamp", },
 # Suo (tallennettu alaluokkiin)
 35400 : lambda _: { "natural" : "wetland", },
 # Suo, helppokulkuinen puuton
@@ -365,7 +365,7 @@ mtk_features = {
 # Täytemaa
 33000 : lambda _: {},
 # Urheilu- ja virkistysalue
-33100 : lambda _: {},
+33100 : lambda _: { "landuse" : "recreation_ground" },
 # Järvivesi
 36200 : lambda _: { "natural" : "water", },
 # Merivesi
@@ -397,7 +397,8 @@ mtk_features = {
 # Puu
 35100 : lambda _: { "natural" : "tree", },
 # Vesikuoppa
-36400 : lambda _: {},
+# FIXME: 36400 is a point, is it rendered as natural=water?
+36400 : lambda _: { "natural" : "water", "water" : "pond" },
 # Virtaveden juoksusuunta (tallennettu alaluokkiin)
 36391 : lambda _: {},
 # Kapean virtaveden juoksusuunta
@@ -430,6 +431,8 @@ mtk_features = {
 35500 : lambda _: {},
 # Maasto/1 tekninen viiva
 30999 : lambda _: {},
+# Virtavesi - kapea
+36300 : lambda _: { "waterway" : "stream", },
 # Virtavesi, alle 2m
 36311 : lambda _: { "waterway" : "stream", },
 # Virtavesi, 2-5m
