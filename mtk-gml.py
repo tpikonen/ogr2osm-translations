@@ -924,7 +924,7 @@ mtk_features = {
 16126 : lambda _: { "man_made" : "lighthouse", "seamark:type" : "landmark", "seamark:category" : "tower", },
 # Hylyn syvyys
 16703 : lambda f: { "depth" : ustr(f['teksti']), },
-# Kulkusyvyys (2.2mm teksti)
+# Kulkusyvyys (2.2mm teksti) # FIXME: depth=x ?
 16503 : lambda _: {},
 # Kulkusyvyys (1.8mm teksti)
 16504 : lambda _: {},
