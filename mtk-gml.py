@@ -825,9 +825,9 @@ mtk_features = {
 # Kansallispuisto
 72202 : lambda _: { "boundary" : "national_park", },
 # Retkeilyalue
-72800 : lambda _: {},
+72800 : lambda _: { "boundary" : "protected_area", "protection_title" : "retkeilyalue", "related_law" : "Ulkoilulaki", "protect_class" : "6" },
 # Suojametsä
-72500 : lambda _: {},
+72500 : lambda _: { "boundary" : "protected_area", "protection_title" : "suojametsä", "related_law" : "Kuntalaki", "protect_class" : "15" },
 # Rauhoitettu kivi
 72310 : lambda _: { "natural" : "stone", },
 # Rauhoitettu puu
