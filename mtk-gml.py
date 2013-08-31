@@ -11,6 +11,7 @@
 
 from osgeo import ogr
 import re
+import logging as l
 
 
 def filterLayer(layer):
@@ -59,9 +60,10 @@ def filterLayer(layer):
         "Virtausnuoli",
     ]
     if layer.GetName() in skiplayers:
-        print("Not processing layer '%s'" % layer.GetName())
+        l.debug("Skipping layer '%s'" % layer.GetName())
         return None
     else:
+        l.debug("Processing layer '%s'" % layer.GetName())
         return layer
 
 
@@ -86,7 +88,7 @@ def fget(ogrfeature, key, default=None):
 
 
 def mtk_default(f):
-    print("Kohdeluokka %s not known to this script" % f['kohdeluokka'])
+    l.warn("Kohdeluokka %s not known to this script" % f['kohdeluokka'])
     return {}
 
 
