@@ -946,6 +946,18 @@ mtk_features = {
 16122 : lambda _: {  "man_made" : "lighthouse", },
 # Merimajakka
 16126 : lambda _: { "man_made" : "lighthouse", "seamark:type" : "landmark", "seamark:category" : "tower", },
+# Merimerkki, vasen
+16141 : lambda _: { "seamark:type" : "buoy_lateral", "seamark:buoy_lateral:colour" : "red", },
+# Merimerkki, oikea
+16142 : lambda _: { "seamark:type" : "buoy_lateral", "seamark:buoy_lateral:colour" : "green", },
+# Merimerkki, pohjoinen
+16143 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "black;yellow" },
+# Merimerkki, etelä
+16144 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "yellow;black" },
+# Merimerkki, itä
+16145 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "black;yellow;black" },
+# Merimerkki, länsi
+16146 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "yellow;black;yellow" },
 # Hylyn syvyys
 16703 : lambda f: { "depth" : ustr(f['teksti']), },
 # Kulkusyvyys (2.2mm teksti) # FIXME: depth=x ?
