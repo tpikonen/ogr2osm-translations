@@ -958,6 +958,12 @@ mtk_features = {
 16145 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "black;yellow;black" },
 # Merimerkki, länsi
 16146 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "yellow;black;yellow" },
+# Merimerkki, kari
+16147 : lambda _: { "seamark:type" : "buoy_isolated_danger", "seamark:buoy_isolated_danger:colour" : "black;red;black" },
+# Merimerkki, turvavesi
+16148 : lambda _: { "seamark:type" : "buoy_safe_water", "seamark:buoy_safe_water:colour_pattern" : "vertical", "seamark:buoy_safe_water:colour" : "red;white" },
+# Merimerkki, erikoismerkki
+16149 : lambda _: { "seamark:type" : "buoy_special_purpose" },
 # Hylyn syvyys
 16703 : lambda f: { "depth" : ustr(f['teksti']), },
 # Kulkusyvyys (2.2mm teksti) # FIXME: depth=x ?
