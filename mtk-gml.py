@@ -84,6 +84,8 @@ def fget(ogrfeature, key, default=None):
         val = ogrfeature[key]
     except ValueError:
         val = default
+    if val is None:
+        val = default
     return val
 
 
