@@ -9,6 +9,7 @@
 # Copyright (c) 2013 Teemu Ikonen <tpikonen@gmail.com>
 # License: MIT License http://opensource.org/licenses/mit-license.php
 
+import geom
 from osgeo import ogr
 import re
 import logging as l
@@ -70,7 +71,11 @@ def filterLayer(layer):
 def filterFeaturePost(feature, ogrfeature, ogrgeometry):
     if feature is None and ogrfeature is None and ogrgeometry is None:
         return
-    feature.tags = mtk_features.get(ogrfeature['kohdeluokka'], mtk_default)(ogrfeature)
+    kohdeluokka = ogrfeature['kohdeluokka']
+    if kohdeluokka in mtk_roadfeatures:
+        feature.tags = mtk_roadfeatures[kohdeluokka](ogrfeature, feature)
+    else:
+        feature.tags = mtk_features.get(kohdeluokka, mtk_default)(ogrfeature)
     feature.tags['source'] = 'MTK_2013' # FIXME: Read year from input XML
 
 
@@ -109,41 +114,69 @@ def mtk_getnimi(f):
     return nimi
 
 
-def mtk_highway(f):
+def mtk_highway(o, f):
     tags = { "highway" : "road" }
-    taso = int(fget(f, 'tasosijainti', 0))
+    taso = int(fget(o, 'tasosijainti', 0))
     if taso == -11:
         tags["tunnel"] = "yes"
     elif taso != 0:
         tags["layer"] = ustr(taso)
     # FIXME: f['valmiusaste'] ?
-    paallyste = int(fget(f, 'paallyste', 0))
+    paallyste = int(fget(o, 'paallyste', 0))
     if paallyste > 0:
         tags["surface"] = "paved" if paallyste == 2 else "unpaved"
-    yksisuun = int(fget(f, 'yksisuuntaisuus', 0))
+    yksisuun = int(fget(o, 'yksisuuntaisuus', 0))
     if yksisuun > 0:
         tags["oneway"] = "yes" if yksisuun == 1 else "-1"
-    nimi = mtk_getnimi(f)
+    nimi = mtk_getnimi(o)
     if nimi:
         tags["name"] = nimi
+    # Add address interpolation to (high)ways, when sensible
+    # address numbers for beginning and end of the road segment exist.
+    minleftnum = int(fget(o, 'minOsoitenumeroVasen', -1))
+    minrightnum = int(fget(o, 'minOsoitenumeroOikea', -1))
+    if minleftnum < 1:
+        minaddress = minrightnum
+    elif minrightnum < 1:
+        minaddress = minleftnum
+    else:
+        minaddress = min(minrightnum, minleftnum)
+    maxleftnum = int(fget(o, 'maxOsoitenumeroVasen', -1))
+    maxrightnum = int(fget(o, 'maxOsoitenumeroOikea', -1))
+    if maxleftnum < 1:
+        maxaddress = maxrightnum
+    elif maxrightnum < 1:
+        maxaddress = maxleftnum
+    else:
+        maxaddress = max(maxrightnum, maxleftnum)
+    if minaddress > 0 and maxaddress > 0:
+        # Feature constructor appends the created objects to
+        # a class variable Feature.features
+        fmin = geom.Feature()
+        fmin.geometry = f.geometry.points[0]
+        fmin.tags = { "addr:housenumber" : ustr(minaddress) }
+        fmax = geom.Feature()
+        fmax.geometry = f.geometry.points[-1]
+        fmax.tags = { "addr:housenumber" : ustr(maxaddress) }
+        tags["addr:interpolation"] = "all"
     return tags
 
 
-def mtk_12112(f):
-    tags = mtk_highway(f)
+def mtk_12112(o, f):
+    tags = mtk_highway(o, f)
     tags["highway"] = "trunk"
-    nimi = mtk_getnimi(f)
+    nimi = mtk_getnimi(o)
     if nimi:
         if nimi == 'Valtatie':
-            nro = ustr(fget(f, 'tienumero', ''))
+            nro = ustr(fget(o, 'tienumero', ''))
             nimi = nimi + " " + nro
             nimi= nimi.strip()
         tags["name"] = nimi
     return tags
 
 
-def mtk_12141(f):
-    tags = mtk_highway(f)
+def mtk_12141(o, f):
+    tags = mtk_highway(o, f)
     tags["highway"] = "track"
     if tags["surface"] == "paved":
         tags["tracktype"] = "grade1"
@@ -184,6 +217,38 @@ def mtk_railway(f):
     elif electrified == 2:
         tags["electrified"] = "no"
     return tags
+
+
+mtk_roadfeatures = {
+# Autotie Ia
+12111 : lambda o,f: dict(mtk_highway(o,f).items() + {"highway":"motorway"}.items()),
+# Autotie Ib
+12112 : mtk_12112, # trunk
+# Autotie IIa
+12121 : lambda o,f: dict(mtk_highway(o,f).items() + {"highway":"primary"}.items()),
+# Autotie IIb
+12122 : lambda o,f: dict(mtk_highway(o,f).items()+{"highway":"secondary"}.items()),
+# Autotie IIIa
+12131 : lambda o,f: dict(mtk_highway(o,f).items() + {"highway":"residential"}.items()),
+# Autotie IIIb
+12132 : lambda o,f: dict(mtk_highway(o,f).items() + {"highway":"service"}.items()),
+# Ajotie
+12141 : mtk_12141, # track, grade 1 or 2
+# Lautta
+12151 : lambda o,f: { "route" : "ferry", },
+# Lossi
+12152 : lambda o,f: { "route" : "ferry", "type" : "cable", },
+# Talvitie
+12312 : lambda o,f: dict(mtk_highway(o,f).items() + {"winter_road":"yes"}.items()),
+# Polku
+12313 : lambda o,f: dict(mtk_highway(o,f).items() + {"highway":"path"}.items()),
+# Kävely- ja pyörätie
+12314 : lambda o,f: dict(mtk_highway(o,f).items() + \
+            { "highway" : "cycleway", "foot" : "designated" }.items()),
+# Ajopolku
+12316 : lambda o,f: dict(mtk_highway(o,f).items() + { "highway":"track", "tracktype" : "grade3" }.items()),
+}
+
 
 mtk_features = {
 # featureclass (kohdeluokka) : function from ogrfeature to OSM tag dict
@@ -905,33 +970,6 @@ mtk_features = {
 12182 : lambda _: {},
 # E- valta- tai kantatien numero
 12183 : lambda _: {},
-# Autotie Ia
-12111 : lambda f: dict(mtk_highway(f).items() + {"highway":"motorway"}.items()),
-# Autotie Ib
-12112 : mtk_12112, # trunk
-# Autotie IIa
-12121 : lambda f: dict(mtk_highway(f).items() + {"highway":"primary"}.items()),
-# Autotie IIb
-12122 : lambda f: dict(mtk_highway(f).items()+{"highway":"secondary"}.items()),
-# Autotie IIIa
-12131 : lambda f: dict(mtk_highway(f).items() + {"highway":"residential"}.items()),
-# Autotie IIIb
-12132 : lambda f: dict(mtk_highway(f).items() + {"highway":"service"}.items()),
-# Ajotie
-12141 : mtk_12141, # track, grade 1 or 2
-# Lautta
-12151 : lambda _: { "route" : "ferry", },
-# Lossi
-12152 : lambda _: { "route" : "ferry", "type" : "cable", },
-# Talvitie
-12312 : lambda f: dict(mtk_highway(f).items() + {"winter_road":"yes"}.items()),
-# Polku
-12313 : lambda f: dict(mtk_highway(f).items() + {"highway":"path"}.items()),
-# Kävely- ja pyörätie
-12314 : lambda f: dict(mtk_highway(f).items() + \
-            { "highway" : "cycleway", "foot" : "designated" }.items()),
-# Ajopolku
-12316 : lambda f: dict(mtk_highway(f).items() + { "highway":"track", "tracktype" : "grade3" }.items()),
 # Ankkuripaikka
 16600 : lambda _: { "seamark:type" : "anchorage", },
 # Hylky, luokittelematon
