@@ -573,7 +573,7 @@ mtk_features = {
 # Huomaute
 3001 : lambda _: {},
 # Lähiosoite
-96001 : lambda f: { "addr:full" : unicode.strip(mtk_getnimi(f) + " " + ustr(fget(f, "numero", ""))) },
+96001 : lambda f: { "addr:full" : unicode.strip(mtk_getnimi(f) + " " + ustr(fget(f, "numero", ""))) } if mtk_getnimi(f) is not None else {},
 # Kulkupaikka
 96002 : lambda _: {},
 # Pelastuskoodipiste
