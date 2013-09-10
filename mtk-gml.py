@@ -980,10 +980,16 @@ mtk_features = {
 16721 : lambda _: { "historic" : "wreck", "seamark:type" : "wreck", },
 # Hylky, syvyys tunnettu
 16722 : lambda _: { "historic" : "wreck", "seamark:type" : "wreck", },
+# Linjamerkki
+#16120 : lambda _: { "seamark:type" : "navigation_line", "seamark:navigation_line:category" : "leading_line" ??? }
 # Kummeli
 16121 : lambda _: { "seamark:type" : "beacon_special_purpose", "seamark:beacon_special_purpose:shape" : "cairn", },
 # Tunnusmajakka
-16122 : lambda _: {  "man_made" : "lighthouse", },
+16122 : lambda _: { "man_made" : "lighthouse", },
+# Loisto
+16124 : lambda _: { "seamark:type" : "light_minor" },
+# Linjaloisto
+16125 : lambda _: { "seamark:type" : "light_minor" },
 # Merimajakka
 16126 : lambda _: { "man_made" : "lighthouse", "seamark:type" : "landmark", "seamark:category" : "tower", },
 # Merimerkki, vasen
@@ -1004,6 +1010,24 @@ mtk_features = {
 16148 : lambda _: { "seamark:type" : "buoy_safe_water", "seamark:buoy_safe_water:colour_pattern" : "vertical", "seamark:buoy_safe_water:colour" : "red;white" },
 # Merimerkki, erikoismerkki
 16149 : lambda _: { "seamark:type" : "buoy_special_purpose" },
+# Viittapoiju, vasen
+16151 : lambda _: { "seamark:type" : "buoy_lateral", "seamark:buoy_lateral:colour" : "red", },
+# Viittapoiju, oikea
+16152 : lambda _: { "seamark:type" : "buoy_lateral", "seamark:buoy_lateral:colour" : "green", },
+# Viittapoiju, pohjoinen
+16153 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "black;yellow" },
+# Viittapoiju, etelä
+16154 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "yellow;black" },
+# Viittapoiju, itä
+16155 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "black;yellow;black" },
+# Viittapoiju, länsi
+16156 : lambda _: { "seamark:type" : "buoy_cardinal", "seamark:buoy_cardinal:colour" : "yellow;black;yellow" },
+# Viittapoiju, kari
+16157 : lambda _: { "seamark:type" : "buoy_isolated_danger", "seamark:buoy_isolated_danger:colour" : "black;red;black" },
+# Viittapoiju, turvavesi
+16158 : lambda _: { "seamark:type" : "buoy_safe_water", "seamark:buoy_safe_water:colour_pattern" : "vertical", "seamark:buoy_safe_water:colour" : "red;white" },
+# Viittapoiju, erikoismerkki
+16159 : lambda _: { "seamark:type" : "buoy_special_purpose" },
 # Hylyn syvyys
 16703 : lambda f: { "depth" : ustr(f['teksti']), },
 # Kulkusyvyys (2.2mm teksti) # FIXME: depth=x ?
