@@ -178,7 +178,7 @@ def mtk_12112(o, f):
 def mtk_12141(o, f):
     tags = mtk_highway(o, f)
     tags["highway"] = "track"
-    if tags["surface"] == "paved":
+    if "surface" in tags and tags["surface"] == "paved":
         tags["tracktype"] = "grade1"
     else:
         tags["tracktype"] = "grade2"
